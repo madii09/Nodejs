@@ -1,6 +1,6 @@
 import readline from 'readline';
 import { parseCommand } from './utils/argParser.js';
-import { up, cd, ls } from './navigation.js';
+import { cd, ls, up } from './navigation.js';
 
 export function startRepl(initialDir) {
   let currentDir = initialDir;
