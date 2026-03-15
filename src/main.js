@@ -1,9 +1,9 @@
-import path from 'path';
+import os from 'os';
 import { startRepl } from './repl.js';
 
-const initialDir = path.resolve('./');
+const homeDir = os.homedir();
 
 console.log('Welcome to Data Processing CLI!');
-console.log(`You are currently in ${initialDir}`);
+console.log(`You are currently in ${homeDir}`);
 
-startRepl(initialDir);
+startRepl(homeDir);

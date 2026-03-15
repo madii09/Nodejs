@@ -5,6 +5,10 @@ import { csvToJson } from './commands/csvToJson.js';
 import { jsonToCsv } from './commands/jsonToCsv.js';
 import { count } from './commands/count.js';
 import { hash } from './commands/hash.js';
+import { hashCompare } from './commands/hashCompare.js';
+import { encrypt } from './commands/encrypt.js';
+import { decrypt } from './commands/decrypt.js';
+import { logStats } from './commands/logStats.js';
 
 export function startRepl(initialDir) {
   let currentDir = initialDir;
@@ -79,6 +83,53 @@ export function startRepl(initialDir) {
           const algorithm = options.algorithm || 'sha256';
           const save = !!options.save;
           await hash(currentDir, options.input, algorithm, save);
+          break;
+        case 'hash-compare':
+          if (!options.input || !options.hash) {
+            console.log('Invalid input');
+            break;
+          }
+
+          await hashCompare(
+            currentDir,
+            options.input,
+            options.hash,
+            options.algorithm || 'sha256',
+          );
+          break;
+        case 'encrypt':
+          if (!options.input || !options.output || !options.password) {
+            console.log('Invalid input');
+            break;
+          }
+
+          await encrypt(
+            currentDir,
+            options.input,
+            options.output,
+            options.password,
+          );
+          break;
+        case 'decrypt':
+          if (!options.input || !options.output || !options.password) {
+            console.log('Invalid input');
+            break;
+          }
+
+          await decrypt(
+            currentDir,
+            options.input,
+            options.output,
+            options.password,
+          );
+          break;
+        case 'log-stats':
+          if (!options.input || !options.output) {
+            console.log('Invalid input');
+            break;
+          }
+
+          await logStats(currentDir, options.input, options.output);
           break;
         default:
           console.log('Invalid input');
